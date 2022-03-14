@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Test') {
             when {
-                branch 'features/*'
+                branch 'features'
             }
         steps {
             withMaven {
@@ -20,7 +20,7 @@ pipeline {
        }
        stage('Build') {
           when {
-             branch 'features/*'
+             branch 'features'
           }
           steps {
             withMaven {
@@ -33,7 +33,7 @@ pipeline {
        }
        stage('Docker Build') {
            when {
-               branch 'features/*'
+               branch 'features'
            }
            steps {
                script {
@@ -46,7 +46,7 @@ pipeline {
 
        stage('Docker Deliver') {
            when {
-               branch 'features/*'
+               branch 'features'
            }
            steps {
                script {
@@ -59,7 +59,7 @@ pipeline {
         }
     stage('Wait for approval') {
         when {
-            branch 'features/*'
+            branch 'features'
         }
         steps {
             script {
@@ -79,7 +79,7 @@ pipeline {
     }
         stage('Deploy to GKE') {
                 when {
-                    branch 'features/*'
+                    branch 'features'
                 }
                 steps{
                     sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./k8s/deployment.yml'

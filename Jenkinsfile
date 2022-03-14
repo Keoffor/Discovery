@@ -14,7 +14,7 @@ pipeline {
         steps {
             withMaven {
                 cleanWs()
-                sh 'test'
+                sh 'mvn -f pom.xml test'
             }
          }
        }

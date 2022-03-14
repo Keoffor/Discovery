@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Test') {
             when {
-                branch 'features'
+                branch 'feature'
             }
         steps {
             withMaven {

@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project3-eureka-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka-deployment
+  template:
+    metadata:
+      labels:
+        app: eureka-deployment
+    spec:
+      containers:
+      - image: keoffor/discovery:latest
+        env:
+          - name: VALIDATION
+            value: http://34.122.231.247:8081/users/validate
+          - name: EUREKA_URI
+            value: http://35.223.118.158:8083/eureka
+          - name: ANGULAR_URI
+            value: http://34.122.103.73:80
+        imagePullPolicy: Always
+        name: eurekacontainer
+        ports:
+        - containerPort: 8083
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: eureka-service
+  name: eurekaservice
+  namespace: default
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http-eureka
+      port: 8083
+      targetPort: 8083
+  selector:
+    app: eureka-deployment
+
+
+
+
+
+
+
+

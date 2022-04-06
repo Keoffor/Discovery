@@ -10,15 +10,17 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: SonarQubePrepare@5
+- task: SonarCloudPrepare@1
   inputs:
-    SonarQube: 'sonarmonitor'
+    SonarCloud: 'sonarcloudapp'
+    organization: 'keoffor'
     scannerMode: 'Other'
     extraProperties: |
-      # Additional properties that will be passed to the scanner, 
+      # Additional properties that will be passed to the scanner,
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectkey_EmailApp_EmailApp
+      sonar.projectKey=keoffor_EmailApp
+      sonar.projectName=EmailApp
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -50,6 +52,6 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
     sqMavenPluginVersionChoice: 'latest'
-- task: SonarQubePublish@5
+- task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'

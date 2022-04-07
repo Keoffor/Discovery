@@ -1,5 +1,6 @@
 # Discovery
 In order for your service to be discoverable, it needs some YAML.
+//checking...
 
 You need to have a name for the discovery service to expose to the gateway.
 spring:
